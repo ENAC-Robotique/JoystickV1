@@ -12,7 +12,6 @@ int slider2 = 0;
 int slider3 = 0;
 int slider4 = 0;
 int slider5 = 0;
-bool on = false;
 
 
 
@@ -26,12 +25,8 @@ void sendValues(){
 }
 
 void readValues(){
-  if(on){
   slider0 = analogRead(SLIDER0);
-  }
-  else{
-  slider1 = analogRead(SLIDER0);
-  }
+  slider1 = analogRead(SLIDER1);
   slider2 = analogRead(SLIDER2);
   slider3 = analogRead(SLIDER3);
   slider4 = analogRead(SLIDER4);
@@ -39,20 +34,18 @@ void readValues(){
 }
 
 void setup() {
-  Serial1.begin(9600);
   pinMode(0, INPUT_PULLUP);
   pinMode(1, INPUT_PULLUP);
   pinMode(13,OUTPUT);
   digitalWrite(13,HIGH);
 }
 
+
+
+
 void loop() {
 
   readValues();
   sendValues();
-  on = digitalRead(0);
-  Joystick.button(1, digitalRead(0));
-  Joystick.button(2, digitalRead(1));
-
   delay(50);
 }
